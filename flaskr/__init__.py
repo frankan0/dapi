@@ -12,16 +12,16 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
+    application = Flask(__name__, instance_relative_config=True)
 
     # ensure the instance folder exists
     try:
-        os.makedirs(app.instance_path)
+        os.makedirs(application.instance_path)
     except OSError:
         pass
 
     # a simple page that says hello
-    @app.route('/query')
+    @application.route('/query')
     def query():
         headers={"User-Agent" : "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.6) ",
     "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -42,4 +42,4 @@ def create_app(test_config=None):
         result = json.dumps(data['payload']['items'])
         return result;
 
-    return app
+    return application
